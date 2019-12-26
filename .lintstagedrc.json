@@ -1,3 +1,3 @@
 {
-  "!(*jest).{js, jsx, ts}": ["stantard --fix", "git add"]
+  "*.{js, jsx, ts}": ["yarn test:staged", "git add"]
 }

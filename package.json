@@ -6,13 +6,19 @@
   "repository": "git@github.com:adrianodrix/clean-node-api.git",
   "author": "Adriano Santos <adrianodrix@gmail.com>",
   "license": "MIT",
+  "standard": {
+    "env": [
+      "jest"
+    ]
+  },
   "devDependencies": {
     "husky": "^4.0.0-beta.5",
     "jest": "^24.9.0",
-    "lint-staged": "^9.5.0",
+    "lint-staged": "^10.0.0-beta.14",
     "standard": "^14.3.1"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:staged": "jest"
   }
 }
