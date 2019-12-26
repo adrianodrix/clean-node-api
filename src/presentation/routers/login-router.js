@@ -16,7 +16,6 @@ module.exports = class LoginRouter {
         return HttpResponse.badRequest(new MissingParamError('email'))
       }
 
-      // const re = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
       if (!this.emailValidator.isValid(email)) {
         return HttpResponse.badRequest(new InvalidParamError('email'))
       }
