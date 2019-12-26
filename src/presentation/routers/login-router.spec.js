@@ -4,7 +4,7 @@ const {
   InvalidParamError,
   UnauthorizedError,
   ServerError
-} = require('../errors')
+} = require('../../utils/errors')
 
 const makeSut = () => {
   const authUseCaseSpy = makeAuthUseCase()
