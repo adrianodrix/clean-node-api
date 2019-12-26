@@ -1,0 +1,9 @@
+{
+  "name": "clean-node-api",
+  "description": "https://www.youtube.com/watch?v=vV1wQ6GFH0A&list=PL9aKtVrF05DyEwK5kdvzrYXFdpZfj1dsG&index=2&t=0s",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:adrianodrix/clean-node-api.git",
+  "author": "Adriano Santos <adrianodrix@gmail.com>",
+  "license": "MIT"
+}
