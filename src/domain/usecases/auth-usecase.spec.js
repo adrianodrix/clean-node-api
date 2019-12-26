@@ -9,6 +9,6 @@ describe('Auth UseCase', () => {
   test('should throw if no email is provided', async () => {
     const sut = new AuthUseCase()
     const promise = sut.auth()
-    await expect(promise).rejects.toThrow()
+    await expect(promise).rejects.toThrow(new MissingParamError('email'))
   })
 })
