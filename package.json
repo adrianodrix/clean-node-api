@@ -19,7 +19,7 @@
     "lint-staged": "^10.0.0-beta.14"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --watchAll",
     "test:staged": "jest"
   }
 }
