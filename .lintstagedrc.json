@@ -1,0 +1,3 @@
+{
+  "!(*jest).js": ["stantard --fix", "git add"]
+}
