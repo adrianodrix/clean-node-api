@@ -19,7 +19,7 @@
     "lint-staged": "^10.0.0-beta.14"
   },
   "scripts": {
-    "test": "jest --watchAll",
-    "test:staged": "jest"
+    "test": "jest --watch --silent --colors --noStackTrace",
+    "test:staged": "jest --passWithNoTests --findRelatedTests --silent --colors --noStackTrace"
   }
 }
