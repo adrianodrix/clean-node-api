@@ -1,9 +1,5 @@
-const express = require('express')
-const cors = require('cors')
-const helmet = require('helmet')
+const app = require('./config/app')
 
-const app = express()
-app.use(cors())
-app.use(helmet())
+app.get('/', (req, res) => res.send('hello world'))
 
 app.listen(3333, () => console.log('Server Running'))
