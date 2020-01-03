@@ -10,7 +10,10 @@ const makeSut = () => {
   const authUseCaseSpy = makeAuthUseCase()
   const emailValidatorSpy = makeEmailValidator()
 
-  const sut = new LoginRouter(authUseCaseSpy, emailValidatorSpy)
+  const sut = new LoginRouter({
+    authUseCase: authUseCaseSpy,
+    emailValidator: emailValidatorSpy
+  })
   return {
     sut,
     authUseCaseSpy,
@@ -119,7 +122,7 @@ describe('Login Router', () => {
   test('Should return 500 if not AuthUseCase has no auth method', async () => {
     class AuthUseCaseSpy {}
 
-    const sut = new LoginRouter(new AuthUseCaseSpy())
+    const sut = new LoginRouter({ authUseCase: new AuthUseCaseSpy() })
     const httpRequest = {
       body: {
         email: 'any_email@test.com',
@@ -133,7 +136,7 @@ describe('Login Router', () => {
   })
 
   test('Should return 500 if AuthUseCase throws', async () => {
-    const sut = new LoginRouter(makeAuthUseCaseWithError())
+    const sut = new LoginRouter({ authUseCase: makeAuthUseCaseWithError() })
     const httpRequest = {
       body: {
         email: 'any_email@test.com',
@@ -147,7 +150,7 @@ describe('Login Router', () => {
   })
 
   test('Should return 500 if not EmailValidator is provided', async () => {
-    const sut = new LoginRouter(makeAuthUseCase())
+    const sut = new LoginRouter({ authUseCase: makeAuthUseCase() })
     const httpRequest = {
       body: {
         email: 'any_email@test.com',
@@ -160,7 +163,10 @@ describe('Login Router', () => {
   })
 
   test('Should return 500 if not AuthUseCase has no isValid method', async () => {
-    const sut = new LoginRouter(makeAuthUseCase(), {})
+    const sut = new LoginRouter({
+      authUseCase: makeAuthUseCase(),
+      emailValidator: {}
+    })
     const httpRequest = {
       body: {
         email: 'any_email@test.com',
@@ -176,7 +182,10 @@ describe('Login Router', () => {
   test('Should return 500 if EmailValidtor throws', async () => {
     const authUseCaseSpy = makeAuthUseCase()
     const emailValidatorSpy = makeEmailValidatorWithError()
-    const sut = new LoginRouter(authUseCaseSpy, emailValidatorSpy)
+    const sut = new LoginRouter({
+      authUseCase: authUseCaseSpy,
+      emailValidator: emailValidatorSpy
+    })
 
     const httpRequest = {
       body: {
