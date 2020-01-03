@@ -17,6 +17,6 @@ describe('App Setup', () => {
     })
 
     const res = await req(app).get('/origin')
-    expect(res.headers['access-control-allow-origin']).toBeDefined()
+    expect(res.headers['access-control-allow-origin']).toBe('*')
   })
 })
