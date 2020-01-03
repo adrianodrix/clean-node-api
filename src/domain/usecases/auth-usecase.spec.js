@@ -47,11 +47,11 @@ const makeSut = () => {
   const encrypterSpy = makeEncrypter()
   const tokenGeneratorSpy = makeTokenGeneratorSpy()
   const loadUserByEmailRepository = makeLoadByEmailRepository()
-  const sut = new AuthUseCase(
+  const sut = new AuthUseCase({
     loadUserByEmailRepository,
-    encrypterSpy,
-    tokenGeneratorSpy
-  )
+    encrypter: encrypterSpy,
+    tokenGenerator: tokenGeneratorSpy
+  })
 
   return {
     sut,
@@ -82,13 +82,13 @@ describe('Auth UseCase', () => {
   })
 
   test('should trhow if no LoadUserByEmailRepository is provided', async () => {
-    const sut = new AuthUseCase()
+    const sut = new AuthUseCase({})
     const promise = sut.auth('any_email@mail.com', 'any_password')
     await expect(promise).rejects.toThrow()
   })
 
   test('should trhow if no LoadUserByEmailRepository has no load method', async () => {
-    const sut = new AuthUseCase({})
+    const sut = new AuthUseCase({ loadUserByEmailRepository: {} })
     const promise = sut.auth('any_email@mail.com', 'any_password')
     await expect(promise).rejects.toThrow()
   })
