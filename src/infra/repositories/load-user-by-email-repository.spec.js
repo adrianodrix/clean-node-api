@@ -4,7 +4,7 @@ const MissingParamError = require('../../utils/errors/missing-param-error')
 let userModel
 
 const makeSut = async () => {
-  return new LoadUserByEmailRepository(userModel)
+  return new LoadUserByEmailRepository()
 }
 describe('LoadUserByEmail Repository', () => {
   beforeAll(async () => {
@@ -41,12 +41,6 @@ describe('LoadUserByEmail Repository', () => {
       _id: fakeUser.ops[0]._id,
       password: fakeUser.ops[0].password
     })
-  })
-
-  test('should throw if no UserModel is provided', async () => {
-    const sut = new LoadUserByEmailRepository()
-    const promise = sut.load('invalid_email@mail.com')
-    await expect(promise).rejects.toThrow()
   })
 
   test('should throw if no email is provided', async () => {

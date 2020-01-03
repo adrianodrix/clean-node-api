@@ -4,7 +4,7 @@ const MissingParamError = require('../../utils/errors/missing-param-error')
 let userModel
 
 const makeSut = () => {
-  return new UpdateAccessTokenRepository(userModel)
+  return new UpdateAccessTokenRepository()
 }
 
 const makeFakeUser = async () => {
@@ -40,14 +40,6 @@ describe('Update Access Token Repository', () => {
       _id: fakeUser.ops[0]._id
     })
     expect(updatedFakeUser.accessToken).toBe('valid_token')
-  })
-
-  test('should throw if no UserModel is provided', async () => {
-    const sut = new UpdateAccessTokenRepository()
-    const fakeUser = await makeFakeUser()
-
-    const promise = sut.update(fakeUser.ops[0]._id, 'valid_token')
-    await expect(promise).rejects.toThrow()
   })
 
   test('should throw if no params are provided', async () => {
