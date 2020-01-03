@@ -14,12 +14,6 @@ module.exports = {
     this.connection = null
     this.db = null
   },
-  async getDb () {
-    if (!this.connection || !this.connection.isConnected()) {
-      await this.connect(this.uri)
-    }
-    return this.db
-  },
   async getCollection (name) {
     if (!this.connection || !this.connection.isConnected()) {
       await this.connect(this.uri)
