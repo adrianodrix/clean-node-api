@@ -1,42 +1,32 @@
-const { MongoClient } = require('mongodb')
+const MongoHelper = require('../helpers/mongo-helper')
 const LoadUserByEmailRepository = require('./load-user-by-email-repository')
-
-let connection, db
+let userModel
 
 const makeSut = async () => {
-  const userModel = await db.collection('users')
-  const sut = new LoadUserByEmailRepository(userModel)
-
-  return {
-    sut,
-    userModel
-  }
+  return new LoadUserByEmailRepository(userModel)
 }
 describe('LoadUserByEmail Repository', () => {
   beforeAll(async () => {
-    connection = await MongoClient.connect(process.env.MONGO_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
-    db = await connection.db()
+    await MongoHelper.connect(process.env.MONGO_URL)
+    userModel = await MongoHelper.getCollection('users')
   })
 
   afterAll(async () => {
-    await connection.close()
+    await MongoHelper.disconnect()
   })
 
   beforeEach(async () => {
-    await db.collection('users').deleteMany({})
+    await userModel.deleteMany()
   })
 
   test('should return null if no user is found', async () => {
-    const { sut } = await makeSut()
+    const sut = await makeSut()
     const user = await sut.load('invalid_email@mail.com')
     expect(user).toBeNull()
   })
 
   test('should return an user if user is found', async () => {
-    const { sut, userModel } = await makeSut()
+    const sut = await makeSut()
     const email = 'valid_email@mail.com'
 
     const fakeUser = await userModel.insertOne({
