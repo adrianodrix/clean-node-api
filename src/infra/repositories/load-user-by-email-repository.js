@@ -1,5 +1,10 @@
 module.exports = class LoadUserByEmailRepository {
+  constructor (userModel) {
+    this.userModel = userModel
+  }
+
   async load (email) {
-    return null
+    const user = await this.userModel.findOne({ email })
+    return user
   }
 }
