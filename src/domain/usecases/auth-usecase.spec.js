@@ -77,8 +77,16 @@ const makeUpdateAccessTokenRepository = () => {
       this.accessToken = accessToken
     }
   }
-  const updateAccessTokenRepository = new UpdateAccessTokenRepository()
-  return updateAccessTokenRepository
+  return new UpdateAccessTokenRepository()
+}
+
+const makeUpdateAccessTokenRepositoryWithError = () => {
+  class UpdateAccessTokenRepository {
+    async update (userId, accessToken) {
+      throw new Error()
+    }
+  }
+  return new UpdateAccessTokenRepository()
 }
 
 const makeSut = () => {
@@ -229,6 +237,12 @@ describe('Auth UseCase', () => {
         encrypter,
         tokenGenerator,
         updateAccessTokenRepository: invalid
+      }),
+      new AuthUseCase({
+        loadUserByEmailRepository,
+        encrypter,
+        tokenGenerator,
+        updateAccessTokenRepository: makeUpdateAccessTokenRepositoryWithError()
       })
     )
 
