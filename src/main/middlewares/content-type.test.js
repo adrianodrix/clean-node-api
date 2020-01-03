@@ -1,0 +1,23 @@
+const app = require('../config/app')
+const req = require('supertest')
+
+describe('Content Type Middleware', () => {
+  test('should return json content type as default', async () => {
+    app.get('/content_type', (req, res) => {
+      res.send({ message: 'content_type' })
+    })
+
+    await req(app)
+      .get('/content_type')
+      .expect('content-type', /json/)
+  })
+
+  test('should return error json content type as string', async () => {
+    app.get('/content_type_string', (req, res) => {
+      res.send('any_string')
+    })
+
+    const promise = req(app).get('/content_type_string')
+    await expect(promise).rejects.toThrow()
+  })
+})

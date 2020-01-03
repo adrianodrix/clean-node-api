@@ -4,7 +4,7 @@ const req = require('supertest')
 describe('App Setup', () => {
   test('should add helmet header', async () => {
     app.get('/test_x_powere_by', (req, res) => {
-      res.send('test_x_powere_by')
+      res.send({ message: 'test_x_powere_by' })
     })
 
     const res = await req(app).get('/test_x_powere_by')
@@ -13,7 +13,7 @@ describe('App Setup', () => {
 
   test('should add cors header', async () => {
     app.get('/origin', (req, res) => {
-      res.send('origin')
+      res.send({ message: 'origin' })
     })
 
     const res = await req(app).get('/origin')
