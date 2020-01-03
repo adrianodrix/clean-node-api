@@ -1,9 +1,6 @@
 const loginRouter = require('../composers/login-router-composer')
+const RouterAdapter = require('../adapters/express-router-adapter')
 
 module.exports = async router => {
-  router.post('/login', loginRouter)
-
-  router.get('/', (req, res) => {
-    res.json({ message: 'Hi' })
-  })
+  router.post('/login', RouterAdapter.adapt(loginRouter))
 }
