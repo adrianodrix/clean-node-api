@@ -1,6 +1,6 @@
-const MongoHelper = require('../infra/helpers/mongo-helper')
-const bcrypt = require('bcrypt')
-const env = require('./config/env')
+import MongoHelper from '../infra/helpers/mongo-helper'
+import bcrypt from 'bcrypt'
+import env from './config/env'
 
 MongoHelper.connect(env.mongoUrl)
   .then(async () => {
@@ -15,7 +15,7 @@ MongoHelper.connect(env.mongoUrl)
       })
     }
 
-    const app = require('./config/app')
+    const app = await import('./config/app')
     app.listen(env.port, () =>
       console.log(`Server running at http://localhost:${env.port}`)
     )
