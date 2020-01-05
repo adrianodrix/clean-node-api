@@ -1,10 +1,10 @@
-import MongoHelper from '../infra/helpers/mongo-helper'
+import MongoHelper from '../infra/helpers/mongo-helper';
 import bcrypt from 'bcrypt'
 import env from './config/env'
 
 MongoHelper.connect(env.mongoUrl)
-  .then(async () => {
-    const userModel = await MongoHelper.getCollection('users')
+  .then(async() => {
+    const userModel = await MongoHelper.getCollection('users');
     const user = await userModel.findOne({
       email: 'adrianodrix@gmail.com'
     })
