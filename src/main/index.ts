@@ -1,6 +1,6 @@
 import MongoHelper from '../infra/helpers/mongo-helper';
-import bcrypt from 'bcrypt'
-import env from './config/env'
+import bcrypt from 'bcrypt';
+import env from './config/env';
 
 MongoHelper.connect(env.mongoUrl)
   .then(async() => {
